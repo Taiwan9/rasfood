@@ -1,10 +1,10 @@
 package br.com.rasmoo.restaurante.service.teste;
 
+import br.com.rasmoo.restaurante.dao.PratoDao;
 import br.com.rasmoo.restaurante.entity.Prato;
+import br.com.rasmoo.restaurante.util.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.math.BigDecimal;
 
 public class PratoService {
@@ -15,11 +15,39 @@ public class PratoService {
         risoto.setDisponivel(true);
         risoto.setValor(BigDecimal.valueOf(88.50));
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("rasfood");
-        EntityManager manager = factory.createEntityManager();
+        Prato feijoada = new Prato();
+        feijoada.setNome("Feijoada");
+        feijoada.setDescricao("Feijoada tradicional de Carne de porco e seca");
+        feijoada.setDisponivel(true);
+        feijoada.setValor(BigDecimal.valueOf(70.50));
+
+        Prato baiaoDeDois = new Prato();
+        baiaoDeDois.setNome("Baiao de Dois");
+        baiaoDeDois.setDescricao("Arroz, feijao tropeiro, queijo, carne e linguiça");
+        baiaoDeDois.setDisponivel(false);
+        baiaoDeDois.setValor(BigDecimal.valueOf(44.50));
+
+        EntityManager manager = JPAUtil.getEntityManagerRasood();
+        PratoDao pratoDao = new PratoDao(manager);
         manager.getTransaction().begin();
-        manager.persist(risoto);
-        manager.getTransaction().commit();
-        manager.close();
+        pratoDao.cadastrar(risoto);
+        manager.flush();
+
+        pratoDao.cadastrar(baiaoDeDois);
+        manager.flush();
+
+        pratoDao.cadastrar(feijoada);
+        manager.flush();
+        System.out.println("O prato consultad foi: "+ pratoDao.consultar(2));
+
+        pratoDao.excluir(feijoada);
+        System.out.println("O prato consultad foi: "+ pratoDao.consultar(3));
+
+        manager.clear();
+
+        risoto.setValor(BigDecimal.valueOf(77.40));
+        pratoDao.atualizar(risoto);
+        System.out.println("O prato consultad foi: "+ pratoDao.consultar(1));
+
     }
 }
