@@ -35,6 +35,16 @@ public class Cardapio {
         this.dataDeRegistro = dataDeRegistro;
     }
 
+    public Cardapio(String nome, String descricao, Boolean disponivel,
+                    BigDecimal valor, Categoria categoria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.disponivel = disponivel;
+        this.valor = valor;
+        this.categoria = categoria;
+    }
+
+
     public Integer getId() {
         return id;
     }
