@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 public class JPAUtil {
     private static final EntityManagerFactory RASFOOD = Persistence.createEntityManagerFactory("rasfood");
 
-    public static EntityManager getEntityManagerRasood(){
+    public static EntityManager getEntityManagerRasfood(){
         return RASFOOD.createEntityManager();
     }
 }
