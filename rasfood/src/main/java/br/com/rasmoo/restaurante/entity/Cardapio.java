@@ -5,6 +5,7 @@ package br.com.rasmoo.restaurante.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "cardapio")
@@ -22,6 +23,9 @@ public class Cardapio {
 
     @Column(name = "data_de_registro")
     private LocalDate dataDeRegistro = LocalDate.now();
+
+    @ManyToMany(mappedBy = "cardapioList")
+    private List<Ordem> ordemList;
 
     public Cardapio(){}
 
