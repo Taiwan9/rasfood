@@ -24,8 +24,8 @@ public class Cardapio {
     @Column(name = "data_de_registro")
     private LocalDate dataDeRegistro = LocalDate.now();
 
-    @ManyToMany(mappedBy = "cardapioList")
-    private List<Ordem> ordemList;
+    @OneToMany
+    private List<OrdensCardapio> ordensCardapioList;
 
     public Cardapio(){}
 
