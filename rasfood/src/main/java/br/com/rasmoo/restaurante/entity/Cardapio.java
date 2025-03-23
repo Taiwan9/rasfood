@@ -18,13 +18,13 @@ public class Cardapio {
     private Boolean disponivel;
     private BigDecimal valor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     @Column(name = "data_de_registro")
     private LocalDate dataDeRegistro = LocalDate.now();
 
-    @OneToMany
+    @OneToMany (fetch = FetchType.LAZY)
     private List<OrdensCardapio> ordensCardapioList;
 
     public Cardapio(){}

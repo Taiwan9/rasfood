@@ -14,12 +14,12 @@ public class Ordem {
     private Integer id;
 
     @Column(name = "valor_total")
-    private BigDecimal valorTotal;
+    private BigDecimal valorTotal = BigDecimal.ZERO;
 
     @Column(name = "data_criacao")
     private LocalDate dataCriacao = LocalDate.now();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "ordem", cascade = CascadeType.ALL)
@@ -30,6 +30,7 @@ public class Ordem {
     public void addOrdensCardapio (OrdensCardapio ordensCardapio){
         ordensCardapio.setOrdem(this);
         this.ordensCardapioList.add(ordensCardapio);
+        this.valorTotal = valorTotal.add(ordensCardapio.getValor().multiply(BigDecimal.valueOf(ordensCardapio.getQuantidade())));
     }
 
 
@@ -78,6 +79,7 @@ public class Ordem {
                 ", valorTotal=" + valorTotal +
                 ", dataCriacao=" + dataCriacao +
                 ", cliente=" + cliente +
+                ", ordensCardapioList=" + ordensCardapioList +
                 '}';
     }
 }
