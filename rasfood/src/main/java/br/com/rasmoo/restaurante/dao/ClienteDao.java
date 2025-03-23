@@ -3,6 +3,7 @@ package br.com.rasmoo.restaurante.dao;
 
 
 import br.com.rasmoo.restaurante.entity.Cliente;
+import br.com.rasmoo.restaurante.entity.ClienteId;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -19,7 +20,7 @@ public class ClienteDao {
         System.out.println("Entidade Cadastrada: " + cliente);
     }
 
-    public Cliente consultarId(final Integer id) {
+    public Cliente consultarId(final ClienteId id) {
         return this.entityManager.find(Cliente.class, id);
     }
     public List<Cliente> consultarTodos() {
