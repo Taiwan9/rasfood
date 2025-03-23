@@ -1,13 +1,6 @@
 package br.com.rasmoo.restaurante.service.teste;
 
-import br.com.rasmoo.restaurante.dao.CardapioDao;
-import br.com.rasmoo.restaurante.dao.ClienteDao;
 import br.com.rasmoo.restaurante.dao.EnderecoDao;
-import br.com.rasmoo.restaurante.dao.OrdemDao;
-import br.com.rasmoo.restaurante.entity.Cliente;
-import br.com.rasmoo.restaurante.entity.Endereco;
-import br.com.rasmoo.restaurante.entity.Ordem;
-import br.com.rasmoo.restaurante.entity.OrdensCardapio;
 import br.com.rasmoo.restaurante.util.CargaDeDadosUtil;
 import br.com.rasmoo.restaurante.util.JPAUtil;
 
@@ -31,6 +24,7 @@ public class OrdemService {
         //System.out.println(ordemDao.consultarItensMaisVendido());
         //System.out.println(clienteDao.consultarPorNome("costa"));
         System.out.println(enderecoDao.consultarClientes("SP", "Sao Paulo", null));
+        System.out.println(enderecoDao.consultarClientesUsandoCritera("SP", "Sao Paulo", null));
         entityManager.getTransaction().commit();
         entityManager.close();
 
